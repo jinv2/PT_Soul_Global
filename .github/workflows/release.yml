@@ -1,0 +1,82 @@
+# =================================================================
+# 🛡️ SHENSIST MATRIX - AUTOMATED RELEASE PIPELINE
+# OFFICIAL: https://shensist.top/ | API: https://ptvoice.shensist.top/
+# =================================================================
+
+name: 🚀 PTVoice Pro Global Release
+
+on:
+  push:
+    tags:
+      - 'v*' # 只有当你推送 v1.0.0 这种标签时才会触发打包
+
+permissions:
+  contents: write
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Install Build Tools & Dependencies
+        run: |
+          pip install pyinstaller requests py-ptsl
+          # 检查 LOGO 是否存在
+          if [ ! -f "assets/logo_ts.webp" ]; then echo "❌ LOGO MISSING!" && exit 1; fi
+
+      - name: 💎 Build .app (Shensist Pro Edition)
+        run: |
+          # 使用 PyInstaller 进行工业打包
+          pyinstaller --onefile --windowed \
+          --name "PTVoice_Pro" \
+          --icon "assets/logo_ts.webp" \
+          --add-data "assets/logo_ts.webp:assets" \
+          --osx-bundle-identifier "top.shensist.ptvoice" \
+          main.py
+
+      - name: 🛡️ Create One-Click Secure-Unlocker (Bypass Apple Gatekeeper)
+        run: |
+          # 创建 install.command, 允许用户通过双击绕过 Apple 安全限制
+          cat <<EOF > dist/install.command
+          #!/bin/bash
+          cd "\$(dirname "\$0")"
+          echo "🛡️ Shensist PTVoice 安全授权与环境校验..."
+          # 核心：暴力清除苹果隔离属性
+          sudo xattr -rd com.apple.quarantine ./PTVoice_Pro.app
+          # 核心：强制赋予执行权限
+          chmod +x ./PTVoice_Pro.app/Contents/MacOS/PTVoice_Pro
+          echo "✅ 授权校验完成！请访问 https://shensist.top/ 开启智能调音。"
+          open ./PTVoice_Pro.app
+          EOF
+          chmod +x dist/install.command
+
+      - name: 🎁 Create Release Artifacts (Branded Zip)
+        run: |
+          # 将编译好的 .app 与解锁脚本一并打包
+          cd dist
+          zip -r PTVoice_Mac_Global_v1.zip PTVoice_Pro.app install.command
+
+      - name: 🚀 Upload to Shensist GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/PTVoice_Mac_Global_v1.zip
+          body: |
+            ### 🛡️ PTVoice Pro 全球发行版 (© 2026 Shensist Matrix)
+            
+            **官方下载渠道：[https://shensist.top/](https://shensist.top/)**
+            **鉴权接口：[https://ptvoice.shensist.top/](https://ptvoice.shensist.top/)**
+            
+            #### 🛠️ Mac 用户安装指南：
+            1. 下载并解压 \`PTVoice_Mac_Global_v1.zip\`。
+            2. **不要直接运行 .app**（苹果会阻止未签名应用）。
+            3. **右键点击 \`install.command\`**，选择“在终端中打开”，按提示输入开机密码以解锁安全限制。
+            4. 解锁完成后，软件会自动启动并弹出黑绿色的 **Shensist** 悬浮岛。
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
