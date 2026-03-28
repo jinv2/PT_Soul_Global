@@ -27,7 +27,7 @@ jobs:
 
       - name: 📦 Install Build Tools & Dependencies
         run: |
-          pip install pyinstaller requests py-ptsl
+          pip install pyinstaller requests py-ptsl Pillow  # 注入 Pillow 处理图标
           # 检查 LOGO 是否存在
           if [ ! -f "assets/logo_ts.webp" ]; then echo "❌ LOGO MISSING!" && exit 1; fi
 
