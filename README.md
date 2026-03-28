@@ -5,7 +5,7 @@
 # PTVoice - Shensist Pro Tools 智能体 (Pro Edition)
 
 [![Official Website](https://img.shields.io/badge/Official-Shensist.top-green?style=for-the-badge)](https://shensist.top/)
-[![Licensing](https://img.shields.io/badge/Service-PTVoice.shensist.top-blue?style=for-the-badge)](https://PTVoice.shensist.top)
+[![Licensing](https://img.shields.io/badge/Service-ptvoice.shensist.top-blue?style=for-the-badge)](https://ptvoice.shensist.top)
 
 ---
 
@@ -21,7 +21,7 @@
 PTVoice 是一款专为 **Pro Tools** 深度定制的 AI 语音交互逻辑层。它通过 **https://shensist.top/** 提供的实时云端授权，实现了硬件指纹锁定与专业的编曲逻辑对齐。
 
 ## 🔐 商业监测与收费逻辑
-1. **云端鉴权**：软件启动即通过 **PTVoice.shensist.top** 校验硬件 ID。
+1. **云端鉴权**：软件启动即通过 **ptvoice.shensist.top** 校验硬件 ID。
 2. **实时监测**：架构师拥有上帝视角，可实时监控全球节点的活跃状态。
 3. **熔断保护**：未获授权或授权到期，系统将强制切换至 Mock 模式并弹出红色版权警告。
 
