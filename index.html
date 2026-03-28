@@ -6,46 +6,64 @@
     <title>PTVoice Pro | Shensist Matrix</title>
     <style>
         :root { --shensist-green: #00ff00; }
-        body { background: #000; color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        body { background: #000; color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; overflow: hidden; }
         
-        /* 💎 核心视觉：圆圈光环 */
-        .logo-box { position: relative; width: 160px; height: 160px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; }
-        .outer-ring { position: absolute; width: 100%; height: 100%; border: 3px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 25px var(--shensist-green); animation: pulse 2s infinite alternate; }
+        /* 💎 核心：圆圈容器 */
+        .logo-box { position: relative; width: 180px; height: 180px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+        .outer-ring { position: absolute; width: 100%; height: 100%; border: 3px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 30px var(--shensist-green); animation: pulse 2s infinite alternate; z-index: 1; }
         
-        /* 🚀 灵魂逻辑：使用滤镜将 LOGO 强制转为神思绿并去除白框 */
-        .inner-logo { 
-            width: 100px; 
+        /* 🚀 灵魂逻辑：放大并切除白色背景 */
+        .inner-logo-wrapper {
+            width: 140px; /* 进一步放大 LOGO */
+            height: 140px;
+            background: #fff; /* 必须给一个白色基底，配合混合模式 */
+            border-radius: 50%; /* 将 LOGO 容器切成圆形 */
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 2;
-            /* 关键：通过滤镜将黑色/深色图形转为发光的绿色 */
-            filter: drop-shadow(0 0 8px var(--shensist-green)) brightness(1.2) contrast(1.2);
+            /* 关键：使用混合模式让 LOGO 的白色与网页背景融合 */
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 10px var(--shensist-green)) brightness(1.1);
         }
 
-        h1 { letter-spacing: 4px; font-size: 2em; text-shadow: 0 0 15px var(--shensist-green); margin: 20px 0; }
-        p { font-size: 0.9em; opacity: 0.8; max-width: 85%; }
-        .badge { background: var(--shensist-green); color: #000; padding: 2px 8px; font-weight: bold; }
+        .inner-logo { 
+            width: 110%; /* 稍微溢出一点，确保填满 */
+            height: auto;
+            /* 针对黑白 webp 的反转逻辑：如果 LOGO 是黑色的，我们需要它变绿 */
+            filter: invert(1) sepia(1) saturate(10000%) hue-rotate(80deg);
+        }
+
+        h1 { letter-spacing: 4px; font-size: 2.2em; text-shadow: 0 0 20px var(--shensist-green); margin: 25px 0 15px 0; }
+        p { font-size: 0.9em; opacity: 0.8; max-width: 85%; margin: 5px 0; }
+        .badge { background: var(--shensist-green); color: #000; padding: 2px 8px; font-weight: bold; margin-left: 5px; }
         
-        a { color: var(--shensist-green); text-decoration: none; border: 1px solid var(--shensist-green); padding: 15px 30px; margin-top: 40px; display: inline-block; transition: 0.3s; box-shadow: 0 0 10px var(--shensist-green); }
-        a:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 30px var(--shensist-green); }
+        a { color: var(--shensist-green); text-decoration: none; border: 1px solid var(--shensist-green); padding: 15px 35px; margin-top: 40px; display: inline-block; transition: 0.3s; box-shadow: 0 0 15px var(--shensist-green); font-weight: bold; }
+        a:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 40px var(--shensist-green); transform: scale(1.05); }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px var(--shensist-green); }
-            100% { transform: scale(1.05); box-shadow: 0 0 35px var(--shensist-green); }
+            0% { transform: scale(1); box-shadow: 0 0 20px var(--shensist-green); }
+            100% { transform: scale(1.08); box-shadow: 0 0 45px var(--shensist-green); }
         }
     </style>
 </head>
 <body>
     <div class="logo-box">
         <div class="outer-ring"></div>
-        <img src="assets/logo_ts.webp" class="inner-logo" alt="Shensist Logo">
+        <div class="inner-logo-wrapper">
+            <img src="assets/logo_ts.webp" class="inner-logo" alt="Shensist Logo">
+        </div>
     </div>
 
     <h1>PTVoice Pro</h1>
     
     <p>📡 授权中枢: <span class="badge">ptvoice.shensist.top</span></p>
-    <p>0元试用版授权已在全球节点同步激活。<br>云端大脑已就绪，实时同步最新的 Pro Tools 交互逻辑。</p>
+    <p>0元试用版授权已在全球节点同步激活。</p>
+    <p>正在监控 PTVoice 核心逻辑实时连通性...</p>
     
-    <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip">⚡ 立即获取 PTVoice Pro (MacOS)</a>
+    <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip">⚡ 立即下载 PTVoice Pro (MacOS)</a>
     
-    <p style="font-size: 0.7em; margin-top: 50px; opacity: 0.5;">© 2026 Shensist Matrix. OFFICIAL: https://shensist.top/</p>
+    <p style="font-size: 0.7em; margin-top: 60px; opacity: 0.5;">© 2026 Shensist Matrix. OFFICIAL: https://shensist.top/</p>
 </body>
 </html>
