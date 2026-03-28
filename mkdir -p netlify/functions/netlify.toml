@@ -1,0 +1,14 @@
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# 强制注入版权安全头
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Powered-By = "Shensist-Agent"
+    X-Official-Site = "https://shensist.top/"

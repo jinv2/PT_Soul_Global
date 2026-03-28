@@ -1,0 +1,28 @@
+# PT-Soul 场景预设配置文件
+
+# 录音环境预设
+scenes:
+  RB:
+    tracks:
+      - name: "Vocal_Lead"
+        type: "Audio"
+        plugins: ["Auto-Tune", "FabFilter Pro-Q 3", "CLA-2A"]
+      - name: "Vocal_Harmony"
+        type: "Audio"
+        plugins: ["FabFilter Pro-Q 3", "ValhallaVintageVerb"]
+    input_monitoring: true
+    record_arm: true
+
+  Pop:
+    tracks:
+      - name: "Pop_Vocal"
+        type: "Audio"
+        plugins: ["Waves Tune Real-Time", "SSL Channel Strip"]
+    input_monitoring: true
+
+# 系统配置
+system:
+  server_port: 5000
+  sdk_path: "./sdk/ptsl_sdk.bundle"
+  debug_mode: true
+  mock_mode: true # 在 Ubuntu 环境下默认为 True

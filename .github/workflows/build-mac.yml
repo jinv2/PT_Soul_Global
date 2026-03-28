@@ -1,0 +1,36 @@
+name: PTVoice Mac Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install Dependencies
+      run: |
+        pip install pyinstaller flask py-ptsl pyperclip requests
+    - name: Build with PyInstaller
+      run: |
+        # 步骤三：App 打包（双击即用的 .app）
+        # 说明：由于 GitHub Actions 环境限制，若无 .icns 文件，可先忽略 --icon 参数或提供 logo.png
+        # 严格执行指令：pyinstaller --onefile --windowed --name "PTVoice" --icon "assets/logo.icns" pt_voice.py
+        # 注意：此处假设用户已将 assets/logo.png 转换为 assets/logo.icns
+        if [ -f "assets/logo.icns" ]; then
+          pyinstaller --onefile --windowed --name "PTVoice" --icon "assets/logo.icns" --add-data "assets:assets" pt_voice.py
+        else
+          pyinstaller --onefile --windowed --name "PTVoice" --add-data "assets:assets" pt_voice.py
+        fi
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PTVoice-Mac
+        path: dist/PTVoice.app

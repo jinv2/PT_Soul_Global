@@ -1,0 +1,7 @@
+{
+    "project_name": "PTVoice",
+    "port": 5000,
+    "sdk_path": "/home/mmm/PTVoice/sdk/PTSL_v4.proto",
+    "mode": "mock",
+    "version": "1.0.0"
+}

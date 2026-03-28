@@ -1,0 +1,40 @@
+name: PT-Soul Mac Cloud Build
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # 允许手动点击打包
+
+jobs:
+  build_mac_app:
+    runs-on: macos-latest # 白嫖 GitHub 的顶级 Mac 实例
+    
+    steps:
+    - name: 检出 Shensist 源码
+      uses: actions/checkout@v4
+      
+    - name: 配置 Python 环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+        
+    - name: 安装打包核心依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install flask pyinstaller
+        
+    - name: PyInstaller 注入灵魂 (编译为 .app)
+      run: |
+        # --windowed 确保后台静默运行，不弹黑框
+        pyinstaller --name "PT-Soul" --windowed --noconfirm --clean main.py
+        
+    - name: 压缩发布包
+      run: |
+        cd dist
+        zip -r PT-Soul-Mac-Release.zip "PT-Soul.app"
+        
+    - name: 上传成品供用户下载
+      uses: actions/upload-artifact@v4
+      with:
+        name: PT-Soul-Global-Release
+        path: dist/PT-Soul-Mac-Release.zip
