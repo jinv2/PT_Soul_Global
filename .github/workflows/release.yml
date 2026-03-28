@@ -33,8 +33,8 @@ jobs:
 
       - name: 💎 Build .app (Shensist Pro Edition)
         run: |
-          # 使用 PyInstaller 进行工业打包
-          pyinstaller --onefile --windowed \
+          # 去掉 --onefile，保持 --windowed 模式生成标准的 .app
+          pyinstaller --noconfirm --windowed \
           --name "PTVoice_Pro" \
           --icon "assets/logo_ts.webp" \
           --add-data "assets/logo_ts.webp:assets" \
