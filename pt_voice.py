@@ -34,8 +34,8 @@ BRAND_ASSETS = {
     "FOOTER_URL": "https://shensist.top/",
     "BASE_DIR": "/home/mmm/桌面/Shensist_Matrix/PT_Soul_Global/"
 }
-# 架构师：线上生产环境 API 地址 (Netlify 全球加速)
-AUTH_API = "https://pt-voice.netlify.app/api/verify" 
+# 🚀 永远指向品牌域名，不要直接暴露 .netlify.app
+AUTH_API = "https://ptvoice.shensist.top/api/verify" 
 HARDCODED_EXPIRATION = datetime.datetime(2026, 6, 1)
 
 # --- 核心安全模块 ---
