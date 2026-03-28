@@ -18,8 +18,8 @@
         .core-logo { 
             width: 100%; height: 100%; 
             /* 使用 Mask 技术切除白色背景 */
-            -webkit-mask-image: url('assets/logo_ts.webp'); mask-image: url('assets/logo_ts.webp');
-            -webkit-mask-size: 80%; mask-size: 80%; /* 放大 LOGO 图形本身 */
+            -webkit-mask-image: url('/assets/logo_ts.webp'); mask-image: url('/assets/logo_ts.webp');
+            -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; /* 放大 LOGO 图形本身 */
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; 
             -webkit-mask-position: center; mask-position: center;
             /* 将 LOGO 图形颜色设为神思绿并增加光晕 */
