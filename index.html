@@ -3,61 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PTVoice Pro | Shensist Matrix Licensing</title>
+    <title>PTVoice Pro | Shensist Matrix</title>
     <style>
-        :root { --shensist-green: #00ff00; --shensist-dark: #000; }
-        body { background: var(--shensist-dark); color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        :root { --shensist-green: #00ff00; }
+        body { background: #000; color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
         
-        /* 💎 核心视觉：LOGO 融合与封装 */
-        .shensist-core { position: relative; width: 150px; height: 150px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; }
+        /* 💎 核心视觉：圆圈光环 */
+        .logo-box { position: relative; width: 160px; height: 160px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; }
+        .outer-ring { position: absolute; width: 100%; height: 100%; border: 3px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 25px var(--shensist-green); animation: pulse 2s infinite alternate; }
         
-        /* 神思绿光圈 */
-        .core-circle { position: absolute; width: 100%; height: 100%; border: 3px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 20px var(--shensist-green); animation: core-pulse 2s infinite alternate; }
-        
-        /* 灵魂融合：去掉白色方块，让 LOGO 成为图形本身并放大 */
-        .core-logo { 
-            width: 100%; height: 100%; 
-            /* 使用 Mask 技术切除白色背景 */
-            -webkit-mask-image: url('/assets/logo_ts.webp'); mask-image: url('/assets/logo_ts.webp');
-            -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center; /* 放大 LOGO 图形本身 */
-            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; 
-            -webkit-mask-position: center; mask-position: center;
-            /* 将 LOGO 图形颜色设为神思绿并增加光晕 */
-            background-color: var(--shensist-green);
-            filter: drop-shadow(0 0 10px var(--shensist-green)); 
-            transform: scale(1); /* 基础放大系数 */
+        /* 🚀 灵魂逻辑：使用滤镜将 LOGO 强制转为神思绿并去除白框 */
+        .inner-logo { 
+            width: 100px; 
             z-index: 2;
+            /* 关键：通过滤镜将黑色/深色图形转为发光的绿色 */
+            filter: drop-shadow(0 0 8px var(--shensist-green)) brightness(1.2) contrast(1.2);
         }
 
-        /* 标题与文本 */
-        h1 { letter-spacing: 3px; font-size: 1.8em; text-shadow: 0 0 15px var(--shensist-green); margin-bottom: 40px; }
-        p { font-size: 0.9em; line-height: 1.6; max-width: 80%; margin: 10px 0; }
-        .status-badge { background: var(--shensist-green); color: #000; padding: 3px 8px; font-weight: bold; }
+        h1 { letter-spacing: 4px; font-size: 2em; text-shadow: 0 0 15px var(--shensist-green); margin: 20px 0; }
+        p { font-size: 0.9em; opacity: 0.8; max-width: 85%; }
+        .badge { background: var(--shensist-green); color: #000; padding: 2px 8px; font-weight: bold; }
         
-        /* 按钮与页脚 */
-        a { color: var(--shensist-green); text-decoration: none; border: 1px solid var(--shensist-green); padding: 12px 24px; margin-top: 30px; font-size: 0.8em; transition: 0.3s; box-shadow: 0 0 5px var(--shensist-green); text-transform: uppercase; }
-        a:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 25px var(--shensist-green); }
-        .footer { font-size: 0.7em; margin-top: 60px; opacity: 0.6; }
-        
-        /* 💫 核心呼吸动画 */
-        @keyframes core-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 15px var(--shensist-green); opacity: 0.8; }
-            100% { transform: scale(1.02); box-shadow: 0 0 30px var(--shensist-green); opacity: 1; }
+        a { color: var(--shensist-green); text-decoration: none; border: 1px solid var(--shensist-green); padding: 15px 30px; margin-top: 40px; display: inline-block; transition: 0.3s; box-shadow: 0 0 10px var(--shensist-green); }
+        a:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 30px var(--shensist-green); }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 15px var(--shensist-green); }
+            100% { transform: scale(1.05); box-shadow: 0 0 35px var(--shensist-green); }
         }
     </style>
 </head>
 <body>
-    <div class="shensist-core">
-        <div class="core-circle"></div>
-        <div class="core-logo"></div> </div>
+    <div class="logo-box">
+        <div class="outer-ring"></div>
+        <img src="assets/logo_ts.webp" class="inner-logo" alt="Shensist Logo">
+    </div>
 
     <h1>PTVoice Pro</h1>
     
-    <p>📡 授权大脑: <span class="status-badge">ptvoice.shensist.top</span></p>
-    <p>0元试用版授权已在全球节点同步激活。<br>未检测到本地 Mock 环境，已成功建立专有加密连接。</p>
+    <p>📡 授权中枢: <span class="badge">ptvoice.shensist.top</span></p>
+    <p>0元试用版授权已在全球节点同步激活。<br>云端大脑已就绪，实时同步最新的 Pro Tools 交互逻辑。</p>
     
-    <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip">⚡ 立即下载 PTVoice Pro (MacOS)</a>
+    <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip">⚡ 立即获取 PTVoice Pro (MacOS)</a>
     
-    <p class="footer">© 2026 Shensist Matrix. OFFICIAL: https://shensist.top/</p>
+    <p style="font-size: 0.7em; margin-top: 50px; opacity: 0.5;">© 2026 Shensist Matrix. OFFICIAL: https://shensist.top/</p>
 </body>
 </html>
