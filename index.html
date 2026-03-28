@@ -6,36 +6,38 @@
     <title>PTVoice Pro | Shensist Matrix</title>
     <style>
         :root { --shensist-green: #00ff00; --shensist-bg: #000; }
-        body { background: var(--shensist-bg); color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; overflow: hidden; }
+        body { background: var(--shensist-bg); color: var(--shensist-green); font-family: 'Courier New', monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; }
         
-        /* 💎 LOGO 核心 */
-        .logo-box { position: relative; width: 150px; height: 150px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
-        .outer-ring { position: absolute; width: 100%; height: 100%; border: 2px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 20px var(--shensist-green); animation: pulse 2s infinite alternate; }
-        .inner-logo-wrapper { width: 120px; height: 120px; background: #fff; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; mix-blend-mode: screen; filter: drop-shadow(0 0 10px var(--shensist-green)); }
+        /* 💎 核心视觉：LOGO 容器 */
+        .logo-box { position: relative; width: 160px; height: 160px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
+        .outer-ring { position: absolute; width: 100%; height: 100%; border: 3px solid var(--shensist-green); border-radius: 50%; box-shadow: 0 0 25px var(--shensist-green); animation: pulse 2s infinite alternate; }
+        .inner-logo-wrapper { width: 130px; height: 130px; background: #fff; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; mix-blend-mode: screen; filter: drop-shadow(0 0 12px var(--shensist-green)); }
         .inner-logo { width: 110%; filter: invert(1) sepia(1) saturate(10000%) hue-rotate(80deg); }
 
-        h1 { letter-spacing: 5px; font-size: 2.5em; text-shadow: 0 0 15px var(--shensist-green); margin: 20px 0; }
-        .badge { background: var(--shensist-green); color: #000; padding: 2px 10px; font-weight: bold; font-size: 0.9em; }
+        h1 { letter-spacing: 5px; font-size: 2.6em; text-shadow: 0 0 15px var(--shensist-green); margin: 20px 0; }
+        .badge { background: var(--shensist-green); color: #000; padding: 3px 12px; font-weight: bold; font-size: 0.9em; border-radius: 2px; }
 
-        /* 🚀 交互按钮组 */
-        .controls { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .btn { text-decoration: none; padding: 15px 40px; font-weight: bold; transition: 0.3s; cursor: pointer; border: 1px solid var(--shensist-green); }
-        .btn-main { background: none; color: var(--shensist-green); box-shadow: 0 0 15px var(--shensist-green); font-size: 1.1em; }
-        .btn-main:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 35px var(--shensist-green); }
-        .btn-sub { font-size: 0.8em; opacity: 0.7; color: var(--shensist-green); border: none; background: none; text-decoration: underline; }
-        .btn-sub:hover { opacity: 1; }
+        /* 🚀 交互按钮 */
+        .controls { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+        .btn { text-decoration: none; padding: 18px 45px; font-weight: bold; transition: 0.3s; cursor: pointer; border: 2px solid var(--shensist-green); }
+        .btn-main { background: none; color: var(--shensist-green); box-shadow: 0 0 15px var(--shensist-green); font-size: 1.2em; text-transform: uppercase; }
+        .btn-main:hover { background: var(--shensist-green); color: #000; box-shadow: 0 0 40px var(--shensist-green); transform: translateY(-3px); }
+        .btn-sub { font-size: 0.9em; opacity: 0.8; color: var(--shensist-green); border: none; background: none; text-decoration: underline; cursor: pointer; }
+        .btn-sub:hover { opacity: 1; text-shadow: 0 0 5px var(--shensist-green); }
 
-        /* 📁 弹出窗口 (Modal) */
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
-        .modal-content { background: #0a0a0a; border: 1px solid var(--shensist-green); width: 90%; max-width: 500px; padding: 30px; text-align: left; box-shadow: 0 0 50px rgba(0,255,0,0.2); position: relative; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: var(--shensist-green); }
-        .step { margin-bottom: 20px; border-left: 2px solid var(--shensist-green); padding-left: 15px; }
-        .step-title { color: #fff; font-size: 1em; margin-bottom: 5px; font-weight: bold; }
-        .step-desc { font-size: 0.8em; opacity: 0.8; line-height: 1.5; }
-        code { color: #ffca28; }
+        /* 📁 弹出式教程 (Modal) */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+        .modal-content { background: #080808; border: 1px solid var(--shensist-green); width: 90%; max-width: 550px; padding: 35px; text-align: left; box-shadow: 0 0 60px rgba(0,255,0,0.2); position: relative; max-height: 85vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 28px; cursor: pointer; color: var(--shensist-green); }
+        
+        .step { margin-bottom: 25px; border-left: 2px solid var(--shensist-green); padding-left: 18px; }
+        .step-title { color: #fff; font-size: 1.1em; margin-bottom: 8px; font-weight: bold; display: flex; align-items: center; }
+        .step-title::before { content: '▶'; font-size: 0.7em; margin-right: 10px; color: var(--shensist-green); }
+        .step-desc { font-size: 0.85em; opacity: 0.8; line-height: 1.6; color: #ccc; }
+        code { color: var(--shensist-green); background: rgba(0,255,0,0.1); padding: 2px 5px; border-radius: 3px; }
 
-        .footer { font-size: 0.7em; margin-top: 60px; opacity: 0.4; }
-        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+        .footer { font-size: 0.7em; margin-top: 80px; opacity: 0.4; letter-spacing: 2px; }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 20px var(--shensist-green); } 100% { transform: scale(1.06); box-shadow: 0 0 40px var(--shensist-green); } }
     </style>
 </head>
 <body>
@@ -47,42 +49,57 @@
     </div>
 
     <h1>PTVoice Pro</h1>
-    <p>📡 云端授权: <span class="badge">ptvoice.shensist.top</span></p>
+    <p>📡 云端鉴权节点: <span class="badge">ptvoice.shensist.top</span></p>
     
     <div class="controls">
-        <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip" class="btn btn-main">⚡ 立即获取 MacOS 发行版</a>
-        <button class="btn btn-sub" onclick="openModal()">查看极客安装教程 (Gatekeeper 解锁)</button>
+        <a href="https://github.com/jinv2/PT_Soul_Global/releases/latest/download/PTVoice_Mac_Global_v1.zip" class="btn btn-main">⚡ 立即下载 MacOS 发行版</a>
+        <button class="btn btn-sub" onclick="openModal()">查看极客安装与无线控制教程</button>
     </div>
 
     <div id="tutorialModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 style="color:var(--shensist-green); font-size:1.2em; border-bottom:1px solid; padding-bottom:10px;">🛡️ 权限解锁指南</h2>
+            <h2 style="color:var(--shensist-green); font-size:1.3em; border-bottom:2px solid; padding-bottom:12px; margin-top:0;">🛡️ PTVoice Pro 极客指南</h2>
             
             <div class="step">
-                <div class="step-title">1. 解压资产</div>
-                <div class="step-desc">解压 Zip 包，确保 <code>install.command</code> 与 App 处于同一目录。</div>
+                <div class="step-title">1. 解禁安全锁 (MacOS 专属)</div>
+                <div class="step-desc">
+                    解压后，<b>不要直接运行 App</b>。右键点击 <code>install.command</code> 选择“用终端打开”，输入开机密码回车。此操作将彻底清除 Apple 隔离属性。
+                </div>
             </div>
+
             <div class="step">
-                <div class="step-title">2. 执行解锁 (关键)</div>
-                <div class="step-desc">右键点击 <code>install.command</code> 选择<b>“用终端打开”</b>。输入开机密码回车，彻底清除苹果隔离锁。</div>
+                <div class="step-title">2. 无话筒控制：手机即是指挥棒</div>
+                <div class="step-desc">
+                    <b>电脑无需配置麦克风。</b> 拿起手机微信，使用“语音转文字”发送指令给电脑。
+                    例如说出并发送：<code>pt:全选</code> 或 <code>pt:开始录音</code>。
+                </div>
             </div>
+
             <div class="step">
-                <div class="step-title">3. 运行环境</div>
-                <div class="step-desc">双击运行程序。看到桌面顶部<b>绿色呼吸 LOGO</b> 即代表 0 元授权已从云端同步。</div>
+                <div class="step-title">3. 零延迟执行逻辑</div>
+                <div class="step-desc">
+                    电脑端程序捕获文本后，将瞬间连接 <code>ptvoice.shensist.top</code> 完成 0 元授信，并在本地毫秒级驱动 Pro Tools 执行相应动作。
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">4. 0 元试用计划</div>
+                <div class="step-desc">
+                    当前处于 Shensist Matrix 全球增长阶段，所有设备 ID 首次接入均自动获得 0 元 Pro 权限，无需任何激活码。
+                </div>
             </div>
             
-            <button onclick="closeModal()" style="width:100%; padding:10px; background:var(--shensist-green); color:#000; border:none; font-weight:bold; cursor:pointer; margin-top:10px;">我已了解</button>
+            <button onclick="closeModal()" style="width:100%; padding:15px; background:var(--shensist-green); color:#000; border:none; font-weight:bold; cursor:pointer; font-size:1em; margin-top:10px; box-shadow: 0 0 15px var(--shensist-green);">进入 Shensist 矩阵</button>
         </div>
     </div>
 
-    <p class="footer">© 2026 Shensist Matrix. OFFICIAL: https://shensist.top/</p>
+    <p class="footer">© 2026 SHENSIST MATRIX. OFFICIAL: https://shensist.top/</p>
 
     <script>
         const modal = document.getElementById("tutorialModal");
         function openModal() { modal.style.display = "flex"; }
         function closeModal() { modal.style.display = "none"; }
-        // 点击弹窗外部关闭
         window.onclick = function(event) { if (event.target == modal) { closeModal(); } }
     </script>
 </body>
